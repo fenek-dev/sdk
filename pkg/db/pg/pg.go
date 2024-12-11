@@ -9,11 +9,11 @@ import (
 )
 
 type Config struct {
-	Host string `env:"HOST" env-required:"true"`
-	Port string `env:"PORT" env-required:"true"`
-	Name string `env:"NAME" env-required:"true"`
-	User string `env:"USER" env-required:"true"`
-	Pass string `env:"PASS" env-required:"true"`
+	Host string `env:"HOST"`
+	Port string `env:"PORT"`
+	Name string `env:"NAME"`
+	User string `env:"USER"`
+	Pass string `env:"PASS"`
 	SSL  string `env:"SSL"`
 }
 

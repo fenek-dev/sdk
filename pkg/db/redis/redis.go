@@ -10,12 +10,12 @@ import (
 )
 
 type Config struct {
-	Host       string `env-required:"true" env:"HOST"`
-	Port       string `env-required:"true" env:"PORT"`
-	Pass       string `env-required:"true" env:"PASS"`
-	DB         int    `env-required:"true" env:"DB"`
-	User       string `env-required:"true" env:"USER"`
-	ClientName string `env-required:"true" env:"CLIENT_NAME"`
+	Host       string `env:"HOST"`
+	Port       string `env:"PORT"`
+	Pass       string `env:"PASS"`
+	DB         int    `env:"DB"`
+	User       string `env:"USER"`
+	ClientName string `env:"CLIENT_NAME"`
 }
 
 type Option func(*redis.Options)
