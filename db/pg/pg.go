@@ -46,8 +46,34 @@ func Connect(ctx context.Context, args Config, options ...Option) (*pgxpool.Pool
 	return conn, nil
 }
 
+func ConnectDSN(ctx context.Context, dsn string, options ...Option) (*pgxpool.Pool, error) {
+	conf, err := pgxpool.ParseConfig(dsn)
+	if err != nil {
+		return nil, fmt.Errorf("unable to parse database conf: %w", err)
+	}
+	for _, option := range options {
+		conf = option(conf)
+	}
+
+	conn, err := pgxpool.NewWithConfig(ctx, conf)
+	if err != nil {
+		return nil, fmt.Errorf("unable to connect to database: %w", err)
+	}
+
+	return conn, nil
+}
+
 func MustConnect(ctx context.Context, args Config, options ...Option) *pgxpool.Pool {
 	conn, err := Connect(ctx, args, options...)
+	if err != nil {
+		panic(err)
+	}
+
+	return conn
+}
+
+func MustConnectDSN(ctx context.Context, dsn string, options ...Option) *pgxpool.Pool {
+	conn, err := ConnectDSN(ctx, dsn, options...)
 	if err != nil {
 		panic(err)
 	}
