@@ -10,7 +10,7 @@ import (
 )
 
 type Config struct {
-	Level slog.Level `env:"LOG_LEVEL" envDefault:"DEBUG"`
+	Level slog.Level `env:"LOG_LEVEL" env-default:"-4"`
 }
 
 func Init(cfg *Config) *slog.Logger {
